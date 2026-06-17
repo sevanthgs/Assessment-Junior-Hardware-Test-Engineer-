@@ -1,11 +1,9 @@
 import pyvisa
 
-ps = pyvisa.ResourceManager().open_resource("POWER_SUPPLY_ADDRESS")
+scope = pyvisa.ResourceManager().open_resource("SCOPE_ADDRESS")
 
-ps.write("VOLT 5")      # Set voltage to 5V
-ps.write("CURR 2")      # Set current limit to 2A
-ps.write("OUTP ON")     # Turn ON output
+voltage = scope.query("MEAS:VOLT?")
+ripple = scope.query("MEAS:VRIP?")
 
-# Testing...
-
-ps.write("OUTP OFF")    # Turn OFF output
+print("Voltage =", voltage)
+print("Ripple =", ripple)
